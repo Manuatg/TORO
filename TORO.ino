@@ -34,7 +34,7 @@ int origen = 0; //Indicación de origen del stepper
 int torero = 0; //Indicador de detección de torero
 int modo=LOW; //Indicador del botón
 int duty = 64; //Amplitud de PWM
-
+int inicio=HIGH
 
 void setup()
 {
@@ -160,11 +160,17 @@ void pwm1()//Aumento de la velocidad del motor tracción
   
 void loop()
 {
+  if(digitalRead(inicio)==HIGH) 
+  {
+    acero();
+    inicio=LOW;
+  }
   if(digitalRead(boton)==HIGH)
   {
     while(digitalRead(boton)==HIGH)
     modo=!modo;
-    //duty=64;
+    duty=64;
+    inicio=HIGH;
   }
   if((digitalRead(ptd)||digitalRead(pti)||digitalRead(pfd)||digitalRead(pfi))==HIGH)//Hace lectura de las patas
   {
