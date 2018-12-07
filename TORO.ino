@@ -161,10 +161,10 @@ void pwm1()//Aumento de la velocidad del motor tracción
   if(modo==HIGH)
     duty=255;
   else{
-    delayMicroseconds(1250);
+    delayMicroseconds(2000);
     duty++;
-    if(duty>=220) 
-    duty=220;
+    if(duty>=240) 
+    duty=240;
 }
   
   
@@ -179,7 +179,7 @@ void loop()
   {
     while(digitalRead(boton)==HIGH)
     modo=!modo;
-    duty=64;
+    duty=128;
     inicio=HIGH;
   }
   if((digitalRead(ptd)||digitalRead(pti)||digitalRead(pfd)||digitalRead(pfi))==HIGH)//Hace lectura de las patas
