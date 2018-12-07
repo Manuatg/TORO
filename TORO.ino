@@ -178,8 +178,19 @@ void loop()
   }
   else
   {
-    analogWrite(mot1,duty); 
-    pwm1();
+    deteccion();
+    if(torero!=0)
+    {
+      acero();
+      analogWrite(mot1,duty); 
+      pwm1();
+    }
+    else
+    {
+      stepper.step(25);
+      analogWrite(mot1,duty); 
+      pwm1();
+    }
   }
 }
 
