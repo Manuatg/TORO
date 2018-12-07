@@ -160,7 +160,7 @@ void pwm1()//Aumento de la velocidad del motor tracción
   
 void loop()
 {
-  if(digitalRead(inicio)==HIGH) 
+  if(inicio==HIGH) 
   {
     acero();
     inicio=LOW;
