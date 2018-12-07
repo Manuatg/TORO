@@ -99,16 +99,25 @@ void deteccion()//Lectura del sensor de distancia
 
 void ataque() //Comandos de movimientos antes de atacar (solo por show)
 {
+  
   acero();
   digitalWrite(mu,LOW);
   digitalWrite(ojos,HIGH);
+  digitalWrite(mot3,HIGH)
+  digitalWrite(mot4,LOW)
   delay(200);
   digitalWrite(mu,HIGH);
   digitalWrite(ojos,LOW);
+  digitalWrite(mot3,LOW)
+  digitalWrite(mot4,LOW)
   delay(200);
   digitalWrite(ojos,HIGH);
+  digitalWrite(mot3,LOW)
+  digitalWrite(mot4,HIGH)
   delay(200);
   digitalWrite(ojos,LOW);
+  digitalWrite(mot3,LOW)
+  digitalWrite(mot4,LOW)
   delay(200);
   digitalWrite(ojos,HIGH);
   delay(200);
@@ -183,7 +192,11 @@ void loop()
     deteccion();
     if(torero!=0)
     {
-      acero();
+      if(ang==1)//Comando para detener el movimiento una vez para enderezar la rueda
+      {
+        analogWrite(mot1,0);
+        ataque();
+      }
       analogWrite(mot1,duty); 
       pwm1();
     }
