@@ -137,6 +137,7 @@ void patas()//Regreso al ruedo cuando detecta margen alguna de las patas
            digitalWrite(mot2,LOW);
            delay(3000);
            stepper.step(-25);
+           analogWrite(mot1,0);
          }
         else if (avd == HIGH){ //Avanza hacia la derecha cuando la pata trasera derecha se sale del ruedo.
            stepper.step(-25);
@@ -144,17 +145,15 @@ void patas()//Regreso al ruedo cuando detecta margen alguna de las patas
            digitalWrite(mot2,LOW);
            delay(3000);
            stepper.step(25);
+           analogWrite(mot1,0);
          }
          else if (re1 == HIGH||re2 == HIGH){ //retrocede cuando la pata trasera izquierda se sale del ruedo.
            digitalWrite(mot2,HIGH); 
            analogWrite(mot1,0);
            delay(3000);
+           digitalWrite(mot2,LOW); 
          }
-         else {
-           digitalWrite(mot1,LOW);
-           digitalWrite(mot2,LOW);
-           delay(3000);
-         }
+
 }
 
 void pwm1()//Aumento de la velocidad del motor tracción
