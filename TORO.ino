@@ -34,7 +34,8 @@ int origen = 0; //Indicación de origen del stepper
 int torero = 0; //Indicador de detección de torero
 int modo=LOW; //Indicador del botón
 int duty = 64; //Amplitud de PWM
-int inicio=HIGH
+int inicio=HIGH //Variable para calibración solo al encender o reiniciar el toro
+int ang=0 //Para dar angulo una sola vez
 
 void setup()
 {
@@ -72,6 +73,7 @@ void setup()
 void acero()//Calibración del motor a pasos
 {
   origen = digitalRead(encoder);
+  ang=0;//Para el angulo que toma en buscar
   if(origen==LOW)
   {
     while(origen==LOW)
@@ -187,7 +189,8 @@ void loop()
     }
     else
     {
-      stepper.step(25);
+      if(ang==0){stepper.step(25);}//Da el ángulo una sola vez para buscar
+      ang=1;
       analogWrite(mot1,duty); 
       pwm1();
     }
