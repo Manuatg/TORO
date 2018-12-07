@@ -33,6 +33,7 @@ int re2 = 0; //Retroceder 2
 int origen = 0; //Indicación de origen del stepper
 int torero = 0; //Indicador de detección de torero
 int modo=LOW; //Indicador del botón
+int duty = 64; //Amplitud de PWM
 
 
 void setup()
@@ -67,7 +68,8 @@ void setup()
   pinMode(mot4, OUTPUT);
   digitalWrite(mu,HIGH);
 }
-void acero()
+
+void acero()//Calibración del motor a pasos
 {
   origen = digitalRead(encoder);
   if(origen==LOW)
@@ -81,7 +83,7 @@ void acero()
   }
 }
 
-void deteccion()
+void deteccion()//Lectura del sensor de distancia
 {
   if(sensor.readRangeSingleMillimeters()>=2500) //Cuando el sensor no obtiene medición arroja el valor 8190
   {
@@ -93,7 +95,7 @@ void deteccion()
   }
 }
 
-void ataque()
+void ataque() //Comandos de movimientos antes de atacar (solo por show)
 {
   acero();
   digitalWrite(mu,LOW);
@@ -111,8 +113,8 @@ void ataque()
   digitalWrite(ojos,LOW);
 }
 
-void patas() {
-       //programa
+void patas()//Regreso al ruedo cuando detecta margen alguna de las patas
+{
      avi = digitalRead(ptd); // Durante todo el proceso interrogaremos
      avd = digitalRead(pti);
      re1 = digitalRead(pfi);
@@ -144,7 +146,18 @@ void patas() {
          }
 }
 
-
+void pwm1()//Aumento de la velocidad del motor tracción
+{
+  if(modo==HIGH)
+    duty=255;
+  else{
+    delayMicroseconds(1250);
+    duty++;
+    if(duty>=220) 
+    duty=220;
+}
+  
+  
 void loop()
 {
   if(digitalRead(boton)==HIGH)
@@ -159,7 +172,8 @@ void loop()
   }
   else
   {
-    
+    analogWrite(mot1,duty); 
+    pwm1();
   }
 }
 
