@@ -33,7 +33,7 @@ int re2 = 0; //Retroceder 2
 int origen = 0; //Indicación de origen del stepper
 int torero = 0; //Indicador de detección de torero
 int modo=LOW; //Indicador del botón
-int duty = 64; //Amplitud de PWM
+int duty = 128; //Amplitud de PWM
 int inicio=HIGH //Variable para calibración solo al encender o reiniciar el toro
 int ang=0 //Para dar angulo una sola vez
 
